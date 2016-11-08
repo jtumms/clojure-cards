@@ -39,11 +39,15 @@
 
 
 (defn straight? [hand]
-  (def sorted-hand (sort (vec (map :rank hand))))
-  (and 
-    (= 1 (- (nth sorted-hand 2) (nth sorted-hand 1)))
-    (= 3 (- (last sorted-hand) (first sorted-hand)))))   
+  (let [sorted-hand (sort (map :rank hand))]
+    (or
+       (= (set sorted-hand) #{11 12 13 1})
+       (and
+         (= 4 (count (distinct sorted-hand)))
+         (= 3 (- (last sorted-hand) (first sorted-hand)))))))   
     
+
+  
   
                    
 (defn -main [& args]
