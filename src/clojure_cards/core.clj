@@ -44,15 +44,17 @@
        (= (set sorted-hand) #{11 12 13 1})
        (and
          (= 4 (count (distinct sorted-hand)))
-         (= 3 (- (last sorted-hand) (first sorted-hand)))))))   
-    
+         (= 3 (- (last sorted-hand) (first sorted-hand))))))) 
 
-  
-  
+(defn straight-flush? [hand]
+  (and
+     (straight? hand)
+     (flush? hand)))
+    
                    
 (defn -main [& args]
   (let [deck (create-deck)
         hands (create-hands deck)
-        hands (filter straight? hands)]
+        hands (filter straight-flush? hands)]
     (println (count hands))))
 
